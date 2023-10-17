@@ -13,6 +13,7 @@ namespace Firebase.Auth
     [DebuggerDisplay("{Uid} | {Info.Email} | {Info.DisplayName}")]
     public class User
     {
+        // testing out pushing to repo
         private const string TokenGrantType = "refresh_token";
 
         private readonly DeleteAccount deleteAccount;
