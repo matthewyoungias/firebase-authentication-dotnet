@@ -5,6 +5,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 
 namespace Firebase.Auth
@@ -18,7 +19,9 @@ namespace Firebase.Auth
 
         public FirebaseAuthConfig()
         {
-            this.HttpClient = new HttpClient();
+            HttpClientHandler handler= new HttpClientHandler();
+            handler.Proxy = this.proxy;
+            this.HttpClient = new HttpClient(handler);
             this.UserRepository = InMemoryRepository.Instance;
             this.Providers = Array.Empty<FirebaseAuthProvider>();
             this.JsonSettings = new JsonSerializerSettings
@@ -84,6 +87,18 @@ namespace Firebase.Auth
         {
             get;
             set;
+        }
+
+        public bool isProxy
+        {
+            get;
+            set;
+        }
+
+        public WebProxy proxy
+        { 
+            get; 
+            set; 
         }
 
         /// <summary>
